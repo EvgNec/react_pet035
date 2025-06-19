@@ -1,20 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-export default function ImageGalleryItem({image}) {
+export default function ImageGalleryItem({ image }) {
+
+    console.log('img prop:', image); 
+  if (!image) return null;
 
   return (
-//     <ul >
-//     {image.map(img => (
-//       <li key={img.id}>
-//         <p>{img.webformatURL}</p>
-//         <p>{img.largeImageURL}</p>
-//       </li>
-//     ))}
-//   </ul>
-<>
-
-</>
-  )
+    <li className="ImageGalleryItem">
+      <img
+        src={image.webformatURL}
+        alt={image.tags || 'Image'}
+        className="ImageGalleryItem-image"
+      />
+    </li>
+  );
 }
-
-
