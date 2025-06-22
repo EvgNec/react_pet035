@@ -1,15 +1,15 @@
 import React from 'react';
 
-export default function ImageGalleryItem({ image }) {
+export default function ImageGalleryItem({ img }) {
 
-    console.log('img prop:', image); 
-  if (!image) return null;
+   
+  if (!img) return null;
 
   return (
     <li className="ImageGalleryItem">
       <img
-        src={image.webformatURL}
-        alt={image.tags || 'Image'}
+        src={img.webformatURL}
+        alt={img.tags || 'Image'}
         className="ImageGalleryItem-image"
       />
     </li>

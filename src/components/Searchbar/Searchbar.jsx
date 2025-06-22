@@ -15,8 +15,6 @@ export default class Searchbar extends Component {
       <button className={styles['SearchForm-button']} type="submit">
         Search
       </button>
-      <label>
-        Search
         <input
           className={styles['SearchForm-input']}
           type="text"
@@ -25,7 +23,6 @@ export default class Searchbar extends Component {
           placeholder="filter name"
 
         />
-      </label>
     </form>
     </header>
     );
