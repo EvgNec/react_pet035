@@ -12,38 +12,40 @@ export default class Searchbar extends Component {
     this.setState({ [name]: value });
   };
     
-  handleSearchSubmit = e => {
+  handleSearchSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    const trimmedSearch = this.state.search.trim();
+
+    if (!trimmedSearch) return; // захист від пустого запиту
+
+    this.props.onSubmit(trimmedSearch);
     this.setState({ search: '' });
-  }
+  };
 
   render() {
     const { search } = this.state;
-  return (
-    <header className={styles['Searchbar']}>
-    <form
-      onSubmit={this.handleSearchSubmit}
-      className={styles['SearchForm']}
-    >
-      <button className={styles['SearchForm-button']} type="submit">
-        Search
-      </button>
-        <input
-          className={styles['SearchForm-input']}
-          type="text"
-          name="search"
-          required
-          placeholder="filter name"
-          onChange={this.handleChange}
-          value={search}
+    return (
+      <header className={styles['Searchbar']}>
+        <form
+          onSubmit={this.handleSearchSubmit}
+          className={styles['SearchForm']}
+        >
+          <button className={styles['SearchForm-button']} type="submit">
+            Search
+          </button>
+          <input
+            className={styles['SearchForm-input']}
+            type="text"
+            name="search"
+            required
+            placeholder="filter name"
+            onChange={this.handleChange}
+            value={search}
             autoFocus
             autoComplete="off"
-        />
-    </form>
-    </header>
+          />
+        </form>
+      </header>
     );
+  }
 }
-}
-// onChange={onCharge}
-// value={value}

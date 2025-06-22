@@ -27,18 +27,22 @@ export class App extends Component {
      
   // }
 
-  async onSearch  (value) {
-    console.log("🚀 ~ App ~ onSearch ~ value:", value)
-    // this.setState({ isLoading: true });
-    const img = await API.getImg(value.search);
-    this.setState({ img: img.hits, isLoading: false });
-    
+  onSearch = async (value) => {
+    console.log("🚀 ~ App ~ onSearch ~ value:", value);
+    try {
+      this.setState({ isLoading: true });
+      const img = await API.getImg(value);
+      this.setState({ img: img.hits, isLoading: false });
+    } catch (error) {
+      this.setState({ error: true, isLoading: false });
+      console.error(error);
+    }
   }
   render() {
     const { img } = this.state;
     return (
       <div>
-        <Searchbar onSubmit={this.onSearch} value={this.state.search}/>
+        <Searchbar onSubmit={this.onSearch} value={this.state.search.trim()}/>
         <ImageGallery image={img}/>
       </div>
     )
