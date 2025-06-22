@@ -3,13 +3,27 @@ import styles from './Searchbar.module.css';
 
 
 export default class Searchbar extends Component {
+  state = {
+    search: '',
+  };
 
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
     
+  handleSearchSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state);
+    this.setState({ search: '' });
+  }
+
   render() {
+    const { search } = this.state;
   return (
     <header className={styles['Searchbar']}>
     <form
-      onSubmit={this.handleFormSubmit}
+      onSubmit={this.handleSearchSubmit}
       className={styles['SearchForm']}
     >
       <button className={styles['SearchForm-button']} type="submit">
@@ -18,10 +32,13 @@ export default class Searchbar extends Component {
         <input
           className={styles['SearchForm-input']}
           type="text"
-          name="filter"
+          name="search"
           required
           placeholder="filter name"
-
+          onChange={this.handleChange}
+          value={search}
+            autoFocus
+            autoComplete="off"
         />
     </form>
     </header>
