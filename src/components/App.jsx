@@ -27,8 +27,7 @@ export class App extends Component {
   onSearch = async (value, page = 1) => {
     try {
       this.setState({ isLoading: true });
-      const img = await API.getImg(value, page);
-  
+      const img = await API.getImg(value, page);  
       this.setState(prevState => ({
         img: page === 1 ? img.hits : [...prevState.img, ...img.hits], // додає зображення
         isLoading: false,
