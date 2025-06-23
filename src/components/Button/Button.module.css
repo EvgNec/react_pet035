@@ -1,0 +1,22 @@
+.Button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #3f51b5;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.Button:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+.Button:active {
+  transform: scale(0.96);
+}

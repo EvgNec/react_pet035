@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import * as API from './Api/Api.js';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/index.js';
+import Button from './Button/Button';
+import css from './App.module.css'
 
 export class App extends Component {
- state = {
+  state = {
     img: [],
     search: '',
     isLoading: false,
     error: false,
     page: 1,
-  }
+  };
 
   // async componentDidMount() {
   //   try {
@@ -21,13 +23,13 @@ export class App extends Component {
   //     this.setState({ error: true, isLoading: false });
   //     console.log(error);
   //   }
-     
+
   // }
 
   onSearch = async (value, page = 1) => {
     try {
       this.setState({ isLoading: true });
-      const img = await API.getImg(value, page);  
+      const img = await API.getImg(value, page);
       this.setState(prevState => ({
         img: page === 1 ? img.hits : [...prevState.img, ...img.hits], // додає зображення
         isLoading: false,
@@ -47,18 +49,15 @@ export class App extends Component {
   };
 
   render() {
-    const { img} = this.state;
+    const { img } = this.state;
     return (
-      <div>
-        <Searchbar onSubmit={this.onSearch} value={this.state.search.trim()}/>
-        <ImageGallery image={img}/>
-        {img.length > 0 && (
-        <button onClick={this.handleLoadMore}>More</button>
-      )}
+      <div className={css.App}>
+        <Searchbar onSubmit={this.onSearch} value={this.state.search.trim()} />
+        <ImageGallery image={img} />
+        {img.length > 0 && <Button onClick={this.handleLoadMore}>Load More </Button>}
       </div>
-    )
+    );
   }
 }
 
-export default App
-
+export default App;
