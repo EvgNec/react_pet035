@@ -1,13 +1,14 @@
 import React from 'react';
+import css from './ImageGalleryItem.module.css'
 
 export default function ImageGalleryItem({ img }) {
   if (!img) return null;
   return (
-    <li className="ImageGalleryItem">
+    <li className={css.ImageGalleryItem}>
       <img
         src={img.webformatURL}
         alt={img.tags || 'Image'}
-        className="ImageGalleryItem-image"
+        className={css.ImageGalleryItem_image}
       />
     </li>
   );
