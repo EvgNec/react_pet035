@@ -5,6 +5,7 @@ import ImageGallery from './ImageGallery/index.js';
 import Button from './Button/Button';
 import css from './App.module.css';
 import Modal from './Modal/Modal.js';
+import { Loader } from './Loader/Loader.js';
 
 export class App extends Component {
   state = {
@@ -64,10 +65,11 @@ export class App extends Component {
   };
 
   render() {
-    const { img, showModal } = this.state;
+    const { img, showModal, isLoading } = this.state;
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.onSearch} value={this.state.search.trim()} />
+        {isLoading && <Loader/>}
         <ImageGallery image={img} onImageClick={this.handleImageClick} />
         {img.length > 0 && (
           <Button onClick={this.handleLoadMore}>Load More </Button>
