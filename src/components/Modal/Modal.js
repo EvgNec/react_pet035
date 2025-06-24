@@ -7,12 +7,16 @@ const modalRoot = document.querySelector('#modal-root');
 export default class Modal extends Component {
   componentDidMount() {
     console.log('Modal componentDidMount');
-    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keydown', this.handleKeyDown);    
+    document.documentElement.style.overflow = 'hidden';// Забороняє прокрутку
+    document.body.style.setProperty('overflow', 'hidden', 'important');// Забороняє прокрутку
   }
 
   componentWillUnmount() {
     console.log('Modal componentWillUnmount');
-    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('keydown', this.handleKeyDown);    
+    document.documentElement.style.overflow = '';// Повертає прокрутку
+    document.body.style.overflow = '';// Повертає прокрутку
   }
 
   handleKeyDown = e => {
