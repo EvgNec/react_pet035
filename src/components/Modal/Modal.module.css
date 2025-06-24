@@ -14,4 +14,28 @@
   .Modal {
     max-width: calc(100vw - 48px);
     max-height: calc(100vh - 24px);
+    position: relative;
+    display: inline-block;
+  }
+
+  .CloseButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 24px;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .CloseButton:hover {
+    background: rgba(0, 0, 0, 0.6);
   }

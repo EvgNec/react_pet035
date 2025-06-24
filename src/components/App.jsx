@@ -3,7 +3,8 @@ import * as API from './Api/Api.js';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/index.js';
 import Button from './Button/Button';
-import css from './App.module.css'
+import css from './App.module.css';
+import Modal from './Modal/Modal.js';
 
 export class App extends Component {
   state = {
@@ -12,6 +13,8 @@ export class App extends Component {
     isLoading: false,
     error: false,
     page: 1,
+    showModal: false, // початково прихована
+    selectedImage: null, // сюди зберігатимемо велике зображення
   };
 
   // async componentDidMount() {
@@ -47,14 +50,33 @@ export class App extends Component {
     const nextPage = page + 1;
     this.onSearch(search, nextPage);
   };
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
+  handleImageClick = largeImageURL => {
+    this.setState({
+      selectedImage: largeImageURL,
+      showModal: true,
+    });
+  };
 
   render() {
-    const { img } = this.state;
+    const { img, showModal } = this.state;
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.onSearch} value={this.state.search.trim()} />
-        <ImageGallery image={img} />
-        {img.length > 0 && <Button onClick={this.handleLoadMore}>Load More </Button>}
+        <ImageGallery image={img} onImageClick={this.handleImageClick} />
+        {img.length > 0 && (
+          <Button onClick={this.handleLoadMore}>Load More </Button>
+        )}
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <img src={this.state.selectedImage} alt="" />
+          </Modal>
+        )}
       </div>
     );
   }
